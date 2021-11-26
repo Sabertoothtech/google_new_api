@@ -15,8 +15,13 @@ import datetime
 today = date.today()
 
 @api_view(['GET'])
-def get_news(request,name):
-    googlenews=GoogleNews(start=today-datetime.timedelta(days=6),end=today)
+def get_news(request,name,days):
+    d1 = today.strftime("%m/%d/%Y")
+
+    d2 = today - datetime.timedelta(days=days)
+
+    d2 = d2.strftime("%m/%d/%Y")
+    googlenews=GoogleNews(start=str(d2),end=str(d1))
     googlenews.search(name)
     result=googlenews.result()
     df=pd.DataFrame(result)

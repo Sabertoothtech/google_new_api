@@ -18,5 +18,5 @@ from .views import *
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('news/<str:name>',get_news)
+    path('news/<str:name>/<int:days>',get_news)
 ]
