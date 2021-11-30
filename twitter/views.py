@@ -33,15 +33,18 @@ today = date.today()
 
 @api_view(['GET'])
 def get_tweets(request,name,days):
-    d1 = today.strftime("%Y/%m/%d")
-
-    d2 = today - datetime.timedelta(days=days)
-
-    d2 = d2.strftime("%Y/%m/%d")
-
-    date_since = d2
+    # d1 = today.strftime("%Y/%m/%d")
+    #
+    # d2 = today - datetime.timedelta(days=days)
+    #
+    # print("date since",d2)
+    #
+    # d2 = d2.strftime("%Y/%m/%d")
+    #
+    # date_since = d2
     search_words="#"+str(name)
-    tweets = tweepy.Cursor(api.search,q=search_words,lang="en",since=date_since,count=10).items()
+    print(search_words)
+    tweets = tweepy.Cursor(api.search,q=search_words,lang="en",result_type='recent').items(days)
 
     text=[]
     tweet_df = pd.DataFrame()
